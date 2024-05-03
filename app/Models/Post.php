@@ -15,6 +15,13 @@ class Post extends Model
         'body',
     ];
 
+    protected static function booted(): void
+    {
+        static::retrieved(function($model) {
+            info('Retrieved model: ', $model->toArray());
+        });
+    }
+
     public function comments(): HasMany
     {
         return $this->hasMany(Comment::class);
